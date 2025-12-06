@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h2 Blog Posts
+  a.btn(href="/posts/new") + New Post
+
+  if posts.length
+    ul.post-list
+      each post in posts
+        li
+          h3
+            a(href=`/posts/${post._id}`)= post.title
+          p Posted by #{post.author.name}
+  else
+    p No posts available.

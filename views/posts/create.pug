@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h2 New Blog Post
+  form(method="POST", action="/posts")
+    label Title
+    input(type="text", name="title", required)
+
+    label Body
+    textarea(name="body", required)
+
+    label Category
+    input(type="text", name="category")
+
+    label Image URL
+    input(type="text", name="imageUrl")
+
+    button(type="submit") Create

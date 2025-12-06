@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+  h2= post.title
+  p Posted by #{post.author.name} on #{post.createdAt.toDateString()}
+  p!= post.body

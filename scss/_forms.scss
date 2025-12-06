@@ -1,0 +1,46 @@
+form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+textarea {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+button,
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: $primary;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: $primary;
+  cursor: pointer;
+  font: inherit;
+}

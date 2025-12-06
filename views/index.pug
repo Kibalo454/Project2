@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  section.hero
+    h1 Live Healthier, Every Day
+    p Explore wellness articles and discover curated health products.
+
+  section.grid
+    .grid__col
+      h2 Latest Blog Posts
+      if posts.length
+        ul.post-list
+          each post in posts
+            li
+              h3
+                a(href=`/posts/${post._id}`)= post.title
+              p.post-list__meta Posted on #{post.createdAt.toDateString()}
+      else
+        p No posts yet.
+
+    .grid__col
+      h2 Featured Products
+      if products.length
+        ul.product-list
+          each product in products
+            li
+              h3
+                a(href=`/products/${product._id}`)= product.name
+              p $#{product.price.toFixed(2)}
+      else
+        p No products yet.

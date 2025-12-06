@@ -1,0 +1,15 @@
+header.site-header
+  nav.navbar
+    a.navbar__brand(href="/") Healthy Lifestyle Hub
+    ul.navbar__menu
+      li: a(href="/posts") Blog
+      li: a(href="/products") Products
+      li: a(href="/contact") Contact
+      if !currentUser
+        li: a(href="/login") Login
+        li: a(href="/register") Sign Up
+      else
+        li.navbar__text Hello #{currentUser.name}
+        li
+          form(action="/logout?_method=POST", method="POST")
+            button(type="submit").btn-link Logout

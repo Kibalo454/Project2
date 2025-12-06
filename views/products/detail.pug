@@ -1,0 +1,6 @@
+extends ../layout
+
+block content
+  h2= product.name
+  p $#{product.price.toFixed(2)}
+  p= product.description

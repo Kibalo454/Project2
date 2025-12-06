@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h2 Products
+  if currentUser && currentUser.role === 'admin'
+    a.btn(href="/products/new") + New Product
+
+  if products.length
+    ul.product-list
+      each product in products
+        li
+          h3
+            a(href=`/products/${product._id}`)= product.name
+          p $#{product.price.toFixed(2)}
+  else
+    p No products available.

@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h2 Contact Us
+  form(method="POST", action="/contact", id="contact-form")
+    label Name
+    input(type="text", name="name", required)
+
+    label Email
+    input(type="email", name="email", required)
+
+    label Message
+    textarea(name="message", required)
+
+    button(type="submit") Send Message

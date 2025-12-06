@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  h2 Edit Blog Post
+  form(method="POST", action=`/posts/${post._id}?_method=PUT`)
+    label Title
+    input(type="text", name="title", required, value=post.title)
+
+    label Body
+    textarea(name="body", required)= post.body
+
+    label Category
+    input(type="text", name="category", value=post.category)
+
+    label Image URL
+    input(type="text", name="imageUrl", value=post.imageUrl)
+
+    button(type="submit") Update

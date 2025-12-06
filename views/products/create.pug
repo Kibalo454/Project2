@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h2 New Product
+  form(method="POST", action="/products")
+    label Name
+    input(type="text", name="name", required)
+
+    label Description
+    textarea(name="description", required)
+
+    label Price
+    input(type="number", name="price", required)
+
+    label Category
+    input(type="text", name="category")
+
+    label Image URL
+    input(type="text", name="imageUrl")
+
+    button(type="submit") Create
