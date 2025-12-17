@@ -3,29 +3,24 @@ const ContactMessage = require('../models/ContactMessage');
 
 const router = express.Router();
 
-router.get('/contact', (req, res) => {
-  res.render('contact/contact', { title: 'Contact Us' });
+// GET /contact
+router.get('/', (req, res) => {
+  res.render('contact/index', { title: 'Contact' });
 });
 
-router.post('/contact', async (req, res, next) => {
+// POST /contact
+router.post('/', async (req, res, next) => {
   try {
     const { name, email, message } = req.body;
 
-    if (!name || !email || !message) {
-      req.session.flash = { type: 'error', message: 'All fields are required.' };
-      return res.redirect('/contact');
-    }
-
-    if (message.length < 10) {
-      req.session.flash = {
-        type: 'error',
-        message: 'Message should be at least 10 characters.'
-      };
+    if (!name || !email || !message || message.trim().length < 10) {
+      req.session.flash = { type: 'error', text: 'All fields required. Message must be at least 10 characters.' };
       return res.redirect('/contact');
     }
 
     await ContactMessage.create({ name, email, message });
-    res.render('contact/thanks', { title: 'Thank You', name });
+    req.session.flash = { type: 'success', text: 'Message sent.' };
+    res.redirect('/contact');
   } catch (err) {
     next(err);
   }

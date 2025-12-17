@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .card
+    h1 New Product
+    form.form(method="POST", action="/products")
+      div
+        label(for="name") Name
+        input#name(type="text", name="name", required)
+
+      div
+        label(for="price") Price
+        input#price(type="number", name="price", step="0.01", required)
+
+      div
+        label(for="imageUrl") Image URL (use /images/*.jpeg)
+        input#imageUrl(type="text", name="imageUrl", placeholder="/images/protein.jpeg")
+
+      div
+        label(for="description") Description
+        textarea#description(name="description")
+
+      button.btn(type="submit") Save Product

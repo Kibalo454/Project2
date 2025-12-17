@@ -1,6 +1,19 @@
 extends ../layout
 
+
 block content
-  h2= post.title
-  p Posted by #{post.author.name} on #{post.createdAt.toDateString()}
-  p!= post.body
+  h1 Blog Posts
+
+  if !posts || posts.length === 0
+    p No posts yet.
+  else
+    .cards
+      each post in posts
+        a.card(href=`/posts/${post._id}`)
+          if post.image
+            img.card__img(src=`/images/${post.image}` alt=post.title)
+          h3.card__title= post.title
+          if post.authorName
+            p.meta Posted by #{post.authorName}
+          if post.createdAt
+            p.meta Posted on #{new Date(post.createdAt).toDateString()}

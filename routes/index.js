@@ -4,10 +4,8 @@ const Product = require('../models/Product');
 
 const router = express.Router();
 
-// Simple health check route for tests
-router.get('/health', (req, res) => {
-  res.status(200).send('OK');
-});
+// Health check for tests
+router.get('/health', (req, res) => res.status(200).send('OK'));
 
 router.get('/', async (req, res, next) => {
   try {

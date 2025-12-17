@@ -27,6 +27,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 
+// static BEFORE routes
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || 'changeme',
@@ -36,10 +39,7 @@ app.use(
       mongoUrl: process.env.MONGODB_URI,
       collectionName: 'sessions'
     }),
-    cookie: {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24
-    }
+    cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 }
   })
 );
 
@@ -50,24 +50,23 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
-
+// routes (NO duplicates)
 app.use('/', indexRoutes);
 app.use('/', authRoutes);
-app.use('/', postRoutes);
-app.use('/', productRoutes);
-app.use('/', contactRoutes);
+app.use('/posts', postRoutes);
+app.use('/products', productRoutes);
+app.use('/contact', contactRoutes);
 
+// 404
 app.use((req, res) => {
   res.status(404).render('404', { title: 'Not Found' });
 });
 
+// error
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).render('error', { title: 'Error', error: err });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running at http://127.0.0.1:${PORT}`);
-});
+const PORT = process.env.PORT || 3001; // you are running 3001
+app.listen(PORT, () => console.log(`Server running at http://127.0.0.1:${PORT}`));

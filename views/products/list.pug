@@ -1,16 +1,16 @@
 extends ../layout
 
 block content
-  h2 Products
-  if currentUser && currentUser.role === 'admin'
-    a.btn(href="/products/new") + New Product
+  h1 Products
 
-  if products.length
-    ul.product-list
-      each product in products
-        li
-          h3
-            a(href=`/products/${product._id}`)= product.name
-          p $#{product.price.toFixed(2)}
+  if !products || products.length === 0
+    p No products yet.
   else
-    p No products available.
+    .cards
+      each product in products
+        a.card(href=`/products/${product._id}`)
+          if product.image
+            img.card__img(src=`/images/${product.image}` alt=product.name)
+          h3.card__title= product.name
+          if product.price
+            p.meta $#{product.price.toFixed(2)}

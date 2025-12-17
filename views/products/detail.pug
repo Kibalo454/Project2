@@ -1,6 +1,14 @@
 extends ../layout
 
 block content
-  h2= product.name
-  p $#{product.price.toFixed(2)}
-  p= product.description
+  a.back(href="/products") ← Back to Products
+
+  h1= product.name
+
+  - const imgSrc = product.imageUrl ? product.imageUrl : "/images/protein.jpeg"
+  img.detail__img(src=imgSrc, alt=product.name)
+
+  p.price $#{Number(product.price || 0).toFixed(2)}
+
+  if product.description
+    p= product.description

@@ -1,31 +1,42 @@
 extends layout
 
 block content
-  section.hero
-    h1 Live Healthier, Every Day
-    p Explore wellness articles and discover curated health products.
+  .card.hero
+    div
+      h1 Live Healthier, Every Day
+      p Explore wellness articles and discover curated health products.
+    img(src="/images/jogging.jpg", alt="People jogging
+    <img src="/images/jogging.jpg" alt="People jogging">
 
-  section.grid
-    .grid__col
-      h2 Latest Blog Posts
-      if posts.length
-        ul.post-list
+  .grid-2
+    section
+      h2.section-title Latest Blog Posts
+      if posts && posts.length
+        ul.list
           each post in posts
-            li
-              h3
-                a(href=`/posts/${post._id}`)= post.title
-              p.post-list__meta Posted on #{post.createdAt.toDateString()}
+            li.item
+              - const imgSrc = post.imageUrl ? post.imageUrl : "/images/water.jpg"
+              img(src=imgSrc, alt=post.title)
+              div
+                h3
+                  a(href=`/posts/${post._id}`)= post.title
+                p Posted on #{new Date(post.createdAt).toDateString()}
       else
-        p No posts yet.
+        .card
+          p No posts yet.
 
-    .grid__col
-      h2 Featured Products
-      if products.length
-        ul.product-list
+    section
+      h2.section-title Featured Products
+      if products && products.length
+        ul.list
           each product in products
-            li
-              h3
-                a(href=`/products/${product._id}`)= product.name
-              p $#{product.price.toFixed(2)}
+            li.item
+              - const imgSrc = product.imageUrl ? product.imageUrl : "/images/protein.jpg"
+              img(src=imgSrc, alt=product.name)
+              div
+                h3
+                  a(href=`/products/${product._id}`)= product.name
+                p $#{Number(product.price || 0).toFixed(2)}
       else
-        p No products yet.
+        .card
+          p No products yet.

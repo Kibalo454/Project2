@@ -67,3 +67,17 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+img {
+  width: 100%;
+  display: block;
+  border-radius: 0.75rem;
+}
+
+.card img,
+.post-detail img,
+.product-detail img {
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}

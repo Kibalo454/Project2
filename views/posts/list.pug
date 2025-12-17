@@ -1,15 +1,18 @@
 extends ../layout
 
 block content
-  h2 Blog Posts
-  a.btn(href="/posts/new") + New Post
+  h1 Blog Posts
 
-  if posts.length
-    ul.post-list
-      each post in posts
-        li
-          h3
-            a(href=`/posts/${post._id}`)= post.title
-          p Posted by #{post.author.name}
+  if !posts || posts.length === 0
+    p No posts yet.
   else
-    p No posts available.
+    .cards
+      each post in posts
+        a.card(href=`/posts/${post._id}`)
+          if post.image
+            img.card__img(src=`/images/${post.image}` alt=post.title)
+          h3.card__title= post.title
+          if post.authorName
+            p.meta Posted by #{post.authorName}
+          if post.createdAt
+            p.meta Posted on #{new Date(post.createdAt).toDateString()}

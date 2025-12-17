@@ -1,23 +1,21 @@
+// views/layout.pug
 doctype html
 html(lang="en")
   head
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title || 'Healthy Lifestyle Hub'
-    link(rel="manifest", href="/manifest.json")
     link(rel="stylesheet", href="/css/main.css")
   body
+    // note the "partials/" prefix
     include partials/_navbar
-    main.site-main
-      include partials/_flash
-      block content
-    footer.site-footer
-      p © #{new Date().getFullYear()} Healthy Lifestyle Hub
+    include partials/_flash
 
-    script.
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/service-worker.js').catch(console.error);
-        });
-      }
+    main.site-main
+      .container
+        block content
+
+    footer.site-footer
+      p © 2025 Healthy Lifestyle Hub
+
     script(src="/js/main.js")
